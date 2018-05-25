@@ -35,7 +35,6 @@ contract ERC20Interface {
     event Approval(address indexed tokenOwner, address indexed spender, uint tokens);
 }
 
-
 // ----------------------------------------------------------------------------
 // Contract function to receive approval and execute function in one call
 //
@@ -44,7 +43,6 @@ contract ERC20Interface {
 contract ApproveAndCallFallBack {
     function receiveApproval(address from, uint256 tokens, address token, bytes data) public;
 }
-
 
 // ----------------------------------------------------------------------------
 // Owned contract
@@ -75,7 +73,6 @@ contract Owned {
     }
 }
 
-
 // ----------------------------------------------------------------------------
 // ERC20 Token, with the addition of symbol, name and decimals and assisted
 // token transfers
@@ -89,7 +86,6 @@ contract CryptoJade is ERC20Interface, Owned, SafeMath {
     mapping(address => uint) balances;
     mapping(address => mapping(address => uint)) allowed;
 
-
     // ------------------------------------------------------------------------
     // Constructor
     // ------------------------------------------------------------------------
@@ -102,7 +98,6 @@ contract CryptoJade is ERC20Interface, Owned, SafeMath {
         Transfer(address(0), 0x5E77C4cf41618A897759b3A2A32665C85BC2aF21, _totalSupply);//MEW address here
     }
 
-
     // ------------------------------------------------------------------------
     // Total supply
     // ------------------------------------------------------------------------
@@ -110,14 +105,12 @@ contract CryptoJade is ERC20Interface, Owned, SafeMath {
         return _totalSupply  - balances[address(0)];
     }
 
-
     // ------------------------------------------------------------------------
     // Get the token balance for account tokenOwner
     // ------------------------------------------------------------------------
     function balanceOf(address tokenOwner) public constant returns (uint balance) {
         return balances[tokenOwner];
     }
-
 
     // ------------------------------------------------------------------------
     // Transfer the balance from token owner's account to to account
@@ -130,7 +123,6 @@ contract CryptoJade is ERC20Interface, Owned, SafeMath {
         Transfer(msg.sender, to, tokens);
         return true;
     }
-
 
     // ------------------------------------------------------------------------
     // Token owner can approve for spender to transferFrom(...) tokens
@@ -145,7 +137,6 @@ contract CryptoJade is ERC20Interface, Owned, SafeMath {
         Approval(msg.sender, spender, tokens);
         return true;
     }
-
 
     // ------------------------------------------------------------------------
     // Transfer tokens from the from account to the to account
@@ -164,7 +155,6 @@ contract CryptoJade is ERC20Interface, Owned, SafeMath {
         return true;
     }
 
-
     // ------------------------------------------------------------------------
     // Returns the amount of tokens approved by the owner that can be
     // transferred to the spender's account
@@ -172,7 +162,6 @@ contract CryptoJade is ERC20Interface, Owned, SafeMath {
     function allowance(address tokenOwner, address spender) public constant returns (uint remaining) {
         return allowed[tokenOwner][spender];
     }
-
 
     // ------------------------------------------------------------------------
     // Token owner can approve for spender to transferFrom(...) tokens
@@ -186,14 +175,12 @@ contract CryptoJade is ERC20Interface, Owned, SafeMath {
         return true;
     }
 
-
     // ------------------------------------------------------------------------
     // Don't accept ETH
     // ------------------------------------------------------------------------
     function () public payable {
         revert();
     }
-
 
     // ------------------------------------------------------------------------
     // Owner can transfer out any accidentally sent ERC20 tokens
